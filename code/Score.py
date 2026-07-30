@@ -14,13 +14,11 @@ class Score:
 
     def __init__(self, window: Surface):
         self.window = window
-        self.surf = pygame.image.load('./mountain asset/ScoreBg.png').convert_alpha()
+        self.surf = pygame.image.load('./asset/ScoreBg.png').convert_alpha()
         self.rect = self.surf.get_rect(left=0, top=0)
 
-
-
     def save(self, game_mode: str, player_score: list[int]):
-        pygame.mixer.music.load('./mountain asset/Score.mp3')
+        pygame.mixer.music.load('./asset/Score.mp3')
         pygame.mixer.music.play(-1)
         db_proxy = DBProxy('DBScore')
         name = ''
@@ -46,12 +44,12 @@ class Score:
                     pygame.quit()
                     sys.exit()
 
-                elif event.type == KEYDOWN :
+                elif event.type == KEYDOWN:
                     if event.key == K_RETURN and len(name) == 4:
                         db_proxy.save({
-                        'name': name,
-                        'score': score,
-                        'date': get_formatted_date(self)})
+                            'name': name,
+                            'score': score,
+                            'date': get_formatted_date(self)})
                         self.show_score()
                         return
                     elif event.key == K_BACKSPACE:
@@ -64,7 +62,7 @@ class Score:
             pass
 
     def show_score(self):
-        pygame.mixer.music.load('./mountain asset/Score.mp3')
+        pygame.mixer.music.load('./asset/Score.mp3')
         pygame.mixer.music.play(-1)
         self.window.blit(source=self.surf, dest=self.rect)
         self.score_text(48, 'TOP 10 SCORE!', C_ORANGE, SCORE_POS['Title'])
@@ -75,7 +73,7 @@ class Score:
 
         for player_score in list_score:
             id_, name, score, date = player_score
-            self.score_text(20,f'{name}    {score:05d}    {date}',C_ORANGE,SCORE_POS[list_score.index(player_score)])
+            self.score_text(20, f'{name}    {score:05d}    {date}', C_ORANGE, SCORE_POS[list_score.index(player_score)])
 
         while True:
             for event in pygame.event.get():
@@ -93,8 +91,9 @@ class Score:
         text_rect: Rect = text_surf.get_rect(center=text_center_pos)
         self.window.blit(source=text_surf, dest=text_rect)
 
+
 def get_formatted_date(self):
-        current_datetime = datetime.now()
-        current_time = current_datetime.strftime("%H:%M")
-        current_date = current_datetime.strftime("%d/%m/%Y")
-        return f"{current_time} - {current_date}"
+    current_datetime = datetime.now()
+    current_time = current_datetime.strftime("%H:%M")
+    current_date = current_datetime.strftime("%d/%m/%Y")
+    return f"{current_time} - {current_date}"

@@ -36,7 +36,7 @@ class Level:
         pygame.time.set_timer(EVENT_ENEMY, SPAWN_TIMET)        # inicia o timer em qualquer modo de jogo
         pygame.time.set_timer(EVENT_TIMEOUT, TIMEOUT_STEP)
     def run(self, player_score:list[int]):
-        pygame.mixer.music.load(f'./mountain asset/{self.name}.mp3')
+        pygame.mixer.music.load(f'./asset/{self.name}.mp3')
         pygame.mixer.music.play(-1)
         clock = pygame.time.Clock()
         while True:
